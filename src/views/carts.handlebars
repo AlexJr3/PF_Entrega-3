@@ -1,0 +1,23 @@
+<h1>Cart</h1>
+<a href="/">Home</a>
+<a href="/register">Sign Up</a>
+<a href="/login">Login</a>
+<a href="/products">Products</a>
+<a href="/cart">Cart</a>
+
+<div>
+    <h1>Cart</h1>
+    <b>Cart ID: {{cart._id}}</b>
+    <ul>
+        {{#each cart.products}}
+            <b><h3>{{product.title}}</h3></b>
+            <li>{{product.description}}</li>
+            <li>{{product.price}}</li>
+            <li>{{product.code}}</li>
+            <li>{{product.stock}}</li>
+            <li>{{product.status}}</li>
+            <li>{{product.category}}</li>
+            <br>
+        {{/each}}
+    </ul>
+</div>
