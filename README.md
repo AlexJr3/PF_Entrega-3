@@ -1,1 +1,1 @@
-Hola Lautaro, el proyecto aun esta en construccion, me estoy poniendo al dia con las ultimas clases, sera posible que me puedas abrir una reentrega porfa
+Hola Lautaro, la parte del ticket creo que funciona bien, estoy en la construccion del chat poniendome al dia con socket.io
