@@ -8,12 +8,12 @@ export class CartService {
   }
 
   async createCart() {
-    const newCart = await this.this.manager.create();
+    const newCart = await this.manager.create();
     return newCart;
   }
 
   async getCarts() {
-    const carts = await this.this.manager.get();
+    const carts = await this.manager.get();
     return carts;
   }
 
@@ -23,21 +23,17 @@ export class CartService {
   }
 
   async addProductToCart(cid, productId) {
-    const cartUpdate = await this.this.manager.addProductToCart(cid, productId);
+    const cartUpdate = await this.manager.addProductToCart(cid, productId);
     return cartUpdate;
   }
 
   async updateCart(cid, data) {
-    const cartUpdate = await this.this.manager.update(cid, data);
+    const cartUpdate = await this.manager.update(cid, data);
     return cartUpdate;
   }
 
   async updateProductQuantity(cid, pid, quantity) {
-    const updateQuanity = await this.this.manager.updateQuantity(
-      cid,
-      pid,
-      quantity
-    );
+    const updateQuanity = await this.manager.updateQuantity(cid, pid, quantity);
     return updateQuanity;
   }
 
@@ -57,6 +53,7 @@ export class CartService {
     let ticketProduct = [];
     let rejectedProducts = [];
     let total = 0;
+    //Checkeamos que el carrito tenga productos
     if (!cart.products.length) {
       return new Error("Tiene que agregar productos");
     }
@@ -72,6 +69,10 @@ export class CartService {
       }
     }
 
+    //agregamos los produtcos restantes al carrito
+    await this.manager.update(cid, rejectedProducts);
+
+    //Creacion del nuevo ticket
     const newTicket = {
       code: uuidv4(),
       purchase_datatime: new Date().toLocaleString(),
@@ -79,41 +80,7 @@ export class CartService {
       purchase: "user.email,",
     };
 
-    console.log(newTicket);
+    const createdTicket = await ticketModel.create(newTicket);
+    return newTicket;
   }
 }
-
-/* async purchaseController(req, res) {
-  const { cid } = req.params;
-  const cart = await cartManager.getCartById(cid);
-  let ticketProduct = [];
-  let rejectedProducts = [];
-  let total;
-
-  if (cart.products.lengt) {
-    return res.send({ message: "Necesita agregar productos" });
-  }
-
-  for (let i = 0; i < cart.products.length; i++) {
-    const cartProduct = cart.products[i];
-
-    if (cartProduct.quantity < cartProduct.product.stock) {
-      ticketProduct.push(cartProduct);
-      total += cartProduct.product.price * cartProduct.quantity;
-    } else {
-      rejectedProducts.push(cartProduct);
-    }
-    const newTicket = {
-      code: uuidv4(),
-      purchase_datatime: new Date().toLocaleString(),
-      amount: total,
-      purchase: req.user.email,
-    };
-
-    const updateCart = await cartManager.updateCart(cid, rejectedProducts);
-
-    const createdTicket = await ticketModel.create(newTicket);
-
-    res.send({ status: "ok", payload: createdTicket });
-  }
-} */

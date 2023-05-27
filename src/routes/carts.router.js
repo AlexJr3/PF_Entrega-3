@@ -13,6 +13,8 @@ cartRouter.get("/:cid", controller.getCartByIdController);
 
 cartRouter.post(
   "/:cid/products/:pid",
+  authenticate("current"),
+  authorize("user"),
   controller.insertProductToCartController
 );
 

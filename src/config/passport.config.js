@@ -73,24 +73,22 @@ export const localPassport = () => {
 
   ///jwtStrategy
 
-  const strategyjwt = () => {
-    passport.use(
-      "current",
-      new jwtStrategy(
-        {
-          jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractor]),
-          secretOrKey: securityToken,
-        },
-        async (jwt_payload, done) => {
-          try {
-            return done(null, jwt_payload);
-          } catch (error) {
-            return done(error);
-          }
+  passport.use(
+    "current",
+    new jwtStrategy(
+      {
+        jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractor]),
+        secretOrKey: securityToken,
+      },
+      async (jwt_payload, done) => {
+        try {
+          return done(null, jwt_payload);
+        } catch (error) {
+          return done(error);
         }
-      )
-    );
-  };
+      }
+    )
+  );
 
   //Serializar el passport
   passport.serializeUser((user, done) => {

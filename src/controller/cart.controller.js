@@ -75,9 +75,14 @@ class CartController {
   }
 
   async purchaseController(req, res) {
-    const { cid } = req.params;
-    console.log(req.user);
-    const ticket = service.purchaseCart(cid);
+    try {
+      const { cid } = req.params;
+      const ticket = await service.purchaseCart(cid);
+
+      res.send({ status: "ok", payload: ticket });
+    } catch (error) {
+      res.send({ status: "error", payload: error.message });
+    }
   }
 
   async deletedProductController(req, res) {
