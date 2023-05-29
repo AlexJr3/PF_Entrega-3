@@ -4,9 +4,8 @@ import {
   AuthController,
   singUpController,
   loginController,
-  currentAuthenticateController,
-  currentAuthorizeController,
 } from "../controller/auth.controller.js";
+import { authenticate, authorize } from "../middlewares/autenticate.js";
 
 const router = Router();
 router.use(cookieParser());
@@ -18,8 +17,8 @@ router.post("/login", loginController, controller.loginRedirectController);
 
 router.get(
   "/current",
-  currentAuthorizeController,
-  currentAuthenticateController,
+  authenticate("current"),
+  authorize("admin"),
   controller.curretController
 );
 

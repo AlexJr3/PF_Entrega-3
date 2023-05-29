@@ -1,4 +1,5 @@
 import express from "express";
+import { Server } from "socket.io";
 import __dirname from "./utils.js";
 import { engine } from "express-handlebars";
 import mongoose from "mongoose";
@@ -18,7 +19,7 @@ const mongoUlr = config.server.dbUrl;
 //Midlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(__dirname + "../public"));
+app.use(express.static(path.join(__dirname, "./public")));
 
 //routes
 app.use("/api/products", productRouter);
@@ -41,6 +42,8 @@ mongoose.connect(mongoUlr).then((conn) => {
   console.log("Connected to DB");
 });
 
-app.listen(port, (req, res) => {
+const httpServer = app.listen(port, (req, res) => {
   console.log(`Server listening on port: ${port}`);
 });
+
+const io = new Server(httpServer);
