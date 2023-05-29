@@ -12,15 +12,14 @@ export const authenticate = (strategy) => {
         if (!user) {
           return res
             .status(400)
-            .send({ status: "erro", payload: "usuario no encontrado" });
+            .send({ status: "error", payload: "usuario no encontrado" });
         }
-        const userDto = new UserDto(user);
 
+        const userDto = new UserDto(user);
         req.user = userDto;
         next();
-      },
-      (req, res, next)
-    );
+      }
+    )(req, res, next);
   };
 
   return passportAuthenticate;

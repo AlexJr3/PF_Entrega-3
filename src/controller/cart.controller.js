@@ -57,7 +57,7 @@ class CartController {
     }
   }
 
-  async updateCuantiyController(req, res) {
+  async updateQuantiyController(req, res) {
     try {
       const { cid, pid } = req.params;
       const { quantity } = req.body;
@@ -77,7 +77,8 @@ class CartController {
   async purchaseController(req, res) {
     try {
       const { cid } = req.params;
-      const ticket = await service.purchaseCart(cid);
+      const user = req.user;
+      const ticket = await service.purchaseCart(cid, user);
 
       res.send({ status: "ok", payload: ticket });
     } catch (error) {

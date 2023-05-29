@@ -13,20 +13,14 @@ cartRouter.get("/:cid", controller.getCartByIdController);
 
 cartRouter.post(
   "/:cid/products/:pid",
-  authenticate("current"),
-  authorize("user"),
   controller.insertProductToCartController
 );
 
 cartRouter.put("/:cid", controller.updateCartController);
 
-cartRouter.put("/:cid/products/:pid", controller.updateCuantiyController);
+cartRouter.put("/:cid/products/:pid", controller.updateQuantiyController);
 
-cartRouter.post(
-  "/:cid/purchase",
-  authenticate("current"),
-  controller.purchaseController
-);
+cartRouter.get("/:cid/purchase", controller.purchaseController);
 
 cartRouter.delete("/:cid/products/:pid", controller.deletedProductController);
 

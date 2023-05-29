@@ -18,7 +18,7 @@ export class CartService {
   }
 
   async getCartById(cid) {
-    const cart = await this.manager.getCartById(cid);
+    const cart = await this.manager.getById(cid);
     return cart;
   }
 
@@ -48,7 +48,7 @@ export class CartService {
     return cart;
   }
 
-  async purchaseCart(cid) {
+  async purchaseCart(cid, user) {
     const cart = await this.manager.getById(cid);
     let ticketProduct = [];
     let rejectedProducts = [];
@@ -63,6 +63,7 @@ export class CartService {
 
       if (cartFor.quantity < cartFor.product.stock) {
         ticketProduct.push(cartFor);
+        cartFor.product.stock -= cartFor.quantity;
         total += cartFor.quantity * cartFor.product.price;
       } else {
         rejectedProducts.push(cartFor);
@@ -71,16 +72,17 @@ export class CartService {
 
     //agregamos los produtcos restantes al carrito
     await this.manager.update(cid, rejectedProducts);
+    //Restar productos del stock
 
     //Creacion del nuevo ticket
     const newTicket = {
       code: uuidv4(),
       purchase_datatime: new Date().toLocaleString(),
       amount: total,
-      purchase: "user.email,",
+      purchase: user.email,
     };
 
     const createdTicket = await ticketModel.create(newTicket);
-    return newTicket;
+    return createdTicket;
   }
 }
