@@ -20,12 +20,7 @@ cartRouter.put("/:cid", controller.updateCartController);
 
 cartRouter.put("/:cid/products/:pid", controller.updateQuantiyController);
 
-cartRouter.get(
-  "/:cid/purchase",
-  authenticate("current"),
-  authorize("user"),
-  controller.purchaseController
-);
+cartRouter.get("/:cid/purchase", controller.purchaseController);
 
 cartRouter.delete("/:cid/products/:pid", controller.deletedProductController);
 
