@@ -22,7 +22,7 @@
     {{/each}}
   </ul>
 
-  <form action="/api/carts/{{cart._id}}/purchase" post="post">
+  <form action="/api/carts/{{cart._id}}/purchase" method="get">
     <button type="submit">Comprar</button>
   </form>
 </div>

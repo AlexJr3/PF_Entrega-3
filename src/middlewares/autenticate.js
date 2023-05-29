@@ -14,9 +14,7 @@ export const authenticate = (strategy) => {
             .status(400)
             .send({ status: "error", payload: "usuario no encontrado" });
         }
-
-        const userDto = new UserDto(user);
-        req.user = userDto;
+        req.user = user;
         next();
       }
     )(req, res, next);

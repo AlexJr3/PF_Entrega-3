@@ -5,6 +5,7 @@ dotenv.config();
 const PORT = process.env.PORT;
 const MONGO_URL = process.env.MONGO_URL;
 const JWT_KEY = process.env.JWT_KEY;
+const MAILER_PW = proces.env.MAILER_PW;
 
 export const config = {
   server: {
@@ -13,5 +14,8 @@ export const config = {
   },
   jwt: {
     key: JWT_KEY,
+  },
+  mailer: {
+    pw: MAILER_PW,
   },
 };

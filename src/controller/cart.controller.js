@@ -77,8 +77,7 @@ class CartController {
   async purchaseController(req, res) {
     try {
       const { cid } = req.params;
-      const user = req.user;
-      const ticket = await service.purchaseCart(cid, user);
+      const ticket = await service.purchaseCart(cid);
 
       res.send({ status: "ok", payload: ticket });
     } catch (error) {

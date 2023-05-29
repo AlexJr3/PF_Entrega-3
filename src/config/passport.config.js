@@ -89,14 +89,14 @@ export const localPassport = () => {
       }
     )
   );
-
-  //Serializar el passport
-  passport.serializeUser((user, done) => {
-    done(null, user._id);
-  });
-
-  passport.deserializeUser(async (id, done) => {
-    const user = await userModel.findById(id);
-    return done(null, user);
-  });
 };
+
+//Serializar el passport
+passport.serializeUser((user, done) => {
+  done(null, user._id);
+});
+
+passport.deserializeUser(async (id, done) => {
+  const user = await userModel.findById(id);
+  return done(null, user);
+});

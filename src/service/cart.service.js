@@ -48,7 +48,7 @@ export class CartService {
     return cart;
   }
 
-  async purchaseCart(cid, user) {
+  async purchaseCart(cid, req) {
     const cart = await this.manager.getById(cid);
     let ticketProduct = [];
     let rejectedProducts = [];
@@ -79,7 +79,7 @@ export class CartService {
       code: uuidv4(),
       purchase_datatime: new Date().toLocaleString(),
       amount: total,
-      purchase: user.email,
+      purchase: req.user.email,
     };
 
     const createdTicket = await ticketModel.create(newTicket);
