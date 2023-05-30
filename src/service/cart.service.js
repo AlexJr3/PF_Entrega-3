@@ -1,6 +1,7 @@
 import { CartManager, ProductManager } from "../dao/index.js";
 import { ticketModel } from "../dao/models/ticket.model.js";
 import { v4 as uuidv4 } from "uuid";
+import { result } from "./mailer.service.js";
 
 export class CartService {
   constructor() {
@@ -81,6 +82,11 @@ export class CartService {
       amount: total,
       purchase: req.user.email,
     };
+
+    //ENVIA EL MAIL CON LOS DATOS DEL TICKET
+    /* 
+    result(newTicket);
+     */
 
     const createdTicket = await ticketModel.create(newTicket);
     return createdTicket;

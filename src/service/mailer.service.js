@@ -10,14 +10,18 @@ export const transport = nodemailer.createTransport({
   },
 });
 
-export const result = async (ticket) =>
+export const result = (ticket) =>
   transport.sendMail({
     from: "alexisjrbwork@gmail.com",
-    to: "maildeprueba@mail.com",
+    to: ticket.purchase,
     subject: "correo de pruebad",
     html: `
     <div>
-        <h1>Esto es un test</h1>
-        <p>AGREGAR LOS DATOS DE TICKET</p>
+        <h1>HCompra en el ecommerce</h1>
+        <ul>
+          <li>Codigo de compra: ${ticket.code}</li>
+          <li>Fecha: ${ticket.purchase_datatime}</li>
+          <li>Total: ${ticket.total}</li>
+        </ul>
     </div>`,
   });
