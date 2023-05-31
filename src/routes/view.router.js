@@ -1,7 +1,9 @@
 import { Router } from "express";
 import { ProductManager, CartManager } from "../dao/index.js";
 import productModel from "../dao/models/product.model.js";
+import { ProductController } from "../controller/products.controller.js";
 
+const controller = new ProductController();
 const router = Router();
 const productManager = new ProductManager();
 const cartManager = new CartManager();
@@ -42,3 +44,5 @@ export default router;
 router.get("/chat", (req, res) => {
   res.render("chat");
 });
+
+router.get("/mockingproducts", controller.mockingProducts);

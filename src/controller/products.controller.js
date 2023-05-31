@@ -1,5 +1,6 @@
 import { ProductService } from "../service/product.service.js";
 import { hasNextAndPrevPage } from "../utils.js";
+import { generateProducts } from "../moks/moks.js";
 
 const service = new ProductService();
 
@@ -82,6 +83,16 @@ class ProductController {
     } catch (err) {
       res.status(400).send({ status: "error", payload: err.message });
     }
+  }
+
+  mockingProducts(req, res) {
+    const cant = parseInt(req.query.cant) || 100;
+    let products = [];
+    for (let i = 0; i < cant; i++) {
+      const product = generateProducts();
+      products.push(product);
+    }
+    res.send({ status: "ok", payload: products });
   }
 }
 
