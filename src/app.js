@@ -11,6 +11,7 @@ import productRouter from "./routes/products.router.js";
 import cartRouter from "./routes/carts.router.js";
 import viewsRouter from "./routes/view.router.js";
 import authRouter from "./routes/auth.router.js";
+import { errorHandler } from "./middlewares/errorHandler.js";
 
 const app = express();
 const port = config.server.port;
@@ -26,6 +27,7 @@ app.use("/api/products", productRouter);
 app.use("/api/carts", cartRouter);
 app.use("/api/auth", authRouter);
 app.use("/", viewsRouter);
+app.use(errorHandler);
 
 //passport-config
 localPassport();

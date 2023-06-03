@@ -1,0 +1,9 @@
+export const EErrors = {
+  ROUTING_ERROR: 1, //RUTA NO EXISTE
+  DATABASE_ERROR: 2, //Error con la base de datos
+  INVALID_JSON: 3, //JSON INVALIDO EN UNA PETICION
+  AUTH_ERROR: 4, //Error de autenticacion
+  INVALID_PARAM: 5, //Parametros invalidos de la ruta
+  CREATE_PRODUCTS: 6, //ERROR CREANDO UN PRODUCTO
+  ADDED_PRODUCTO_TO_CART: 7, //ERROR AL AGREGAR UN PRODUCTO AL CARRITO
+};
