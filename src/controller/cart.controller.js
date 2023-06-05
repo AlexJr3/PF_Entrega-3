@@ -1,4 +1,7 @@
 import { CartService } from "../service/cart.service.js";
+import { CustomError } from "../service/error/customError.js";
+import { EErrors } from "../service/error/enums.js";
+import { ErrorIdParam } from "../service/error/paramsError.js";
 
 const service = new CartService();
 
@@ -77,6 +80,14 @@ class CartController {
   async purchaseController(req, res) {
     try {
       const { cid } = req.params;
+      if (!cid) {
+        CustomError.createError({
+          name: "cart get id errorr",
+          casue: ErrorIdParam(cid),
+          message: "errror obteniendo el id del cart",
+          errorCode: EErrors.INVALID_PARAM,
+        });
+      }
       const ticket = await service.purchaseCart(cid);
 
       res.send({ status: "ok", payload: ticket });
