@@ -12,6 +12,7 @@ import cartRouter from "./routes/carts.router.js";
 import viewsRouter from "./routes/view.router.js";
 import authRouter from "./routes/auth.router.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
+import { addLogger } from "./utils/logger.js";
 
 const app = express();
 const port = config.server.port;
@@ -21,6 +22,7 @@ const mongoUlr = config.server.dbUrl;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "./public")));
+app.use(addLogger);
 
 //routes
 app.use("/api/products", productRouter);

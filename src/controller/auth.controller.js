@@ -37,4 +37,14 @@ export class AuthController {
   async failurePageController(req, res) {
     res.send({ status: "error", message: new Error() });
   }
+
+  async loggerTest(req, res) {
+    req.logger.fatal("nivel FATAL");
+    req.logger.error("nivel ERROR");
+    req.logger.warning("nivel WARNING");
+    req.logger.info("nivel INFO");
+    req.logger.http("nivel HTTP");
+    req.logger.debug("nivel DEBUG");
+    res.send({ status: "ok", message: "test  Logger" });
+  }
 }

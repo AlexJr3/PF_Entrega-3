@@ -24,4 +24,5 @@ router.get(
 
 router.get("/failure-page", controller.failurePageController);
 
+router.get("/loggerTest", controller.loggerTest);
 export default router;
