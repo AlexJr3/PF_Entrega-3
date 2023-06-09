@@ -35,6 +35,7 @@ export class AuthController {
   }
 
   async failurePageController(req, res) {
+    req.logger.error(new Error());
     res.send({ status: "error", message: new Error() });
   }
 

@@ -1,9 +1,7 @@
 import productModel from "../models/product.model.js";
 
 class productManager {
-  constructor() {
-    console.log("Working with products with DataBase");
-  }
+  constructor() {}
 
   async get(queryLimit, queryPage, querySort, query) {
     const getLimit = queryLimit ? queryLimit : 10;

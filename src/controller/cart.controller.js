@@ -33,6 +33,7 @@ class CartController {
 
       res.status(201).send({ status: "ok", payload: cart });
     } catch (error) {
+      req.logger.error({ error });
       res.status(400).send({ status: "error", payload: error.message });
     }
   }
@@ -44,6 +45,7 @@ class CartController {
 
       res.status(200).send({ status: "ok", payload: cartUpdate });
     } catch (err) {
+      req.logger.error({ error });
       res.status(400).send({ status: "error", payload: err.message });
     }
   }
@@ -56,6 +58,7 @@ class CartController {
       const cart = await service.updateCart(cid, data);
       res.status(200).send({ status: "ok", payload: cart });
     } catch (error) {
+      req.logger.error({ error });
       res.status(400).send({ status: "error", payload: error.message });
     }
   }
@@ -73,6 +76,7 @@ class CartController {
 
       res.status(200).send({ status: "ok", payload: newQuantity });
     } catch (error) {
+      req.logger.error({ error });
       res.status(400).send({ status: "error", payload: error.message });
     }
   }
@@ -92,6 +96,7 @@ class CartController {
 
       res.send({ status: "ok", payload: ticket });
     } catch (error) {
+      req.logger.error({ error });
       res.send({ status: "error", payload: error.message });
     }
   }
@@ -103,6 +108,7 @@ class CartController {
 
       res.status(200).send({ status: "ok", payload: prod });
     } catch (error) {
+      req.logger.error({ error });
       res.status(400).send({ status: "error", payload: error.message });
     }
   }

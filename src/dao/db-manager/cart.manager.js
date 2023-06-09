@@ -1,9 +1,7 @@
 import cartModel from "../models/cart.model.js";
 
 class CartManager {
-  constructor() {
-    console.log("Working with carts with DataBase");
-  }
+  constructor() {}
   //Obtener  carts
   async get() {
     const carts = await cartModel.find().lean().populate("products.product");

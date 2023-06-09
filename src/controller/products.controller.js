@@ -14,6 +14,8 @@ class ProductController {
 
       res.status(200).send({ status: "ok", payload: products });
     } catch (err) {
+      req.logger.error({ err });
+
       res.status(400).send({ status: "error", payload: err.message });
     }
   }
@@ -54,6 +56,7 @@ class ProductController {
 
       res.status(201).send({ status: "ok", payload: newProduct });
     } catch (err) {
+      req.logger.error({ err });
       res.status(400).send({ status: "ok", payload: err.message });
     }
   }
@@ -70,6 +73,7 @@ class ProductController {
         payload: product,
       });
     } catch (err) {
+      req.logger.error({ err });
       res.status(400).send({ status: "error", payload: err.message });
     }
   }
@@ -81,6 +85,7 @@ class ProductController {
 
       res.status(202).send({ status: "ok", payload: "Product Deleted" });
     } catch (err) {
+      req.logger.error({ err });
       res.status(400).send({ status: "error", payload: err.message });
     }
   }
