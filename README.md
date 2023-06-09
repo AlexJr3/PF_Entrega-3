@@ -11,3 +11,5 @@ Aspectos a incluir
 # Agregar logs de valor alto en los puntos importantes de tu servidor (errores, advertencias, etc) y modificar los console.log() habituales que tenemos para que muestren todo a partir de winston.
 
 # Crear un endpoint /loggerTest que permita probar todos los logs
+
+Agregado el logger, falta agregalo a los endpoints.
