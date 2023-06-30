@@ -13,6 +13,8 @@ import viewsRouter from "./routes/view.router.js";
 import authRouter from "./routes/auth.router.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
 import { addLogger } from "./utils/logger.js";
+import { swaggerSpecs } from "./config/docConfig.js";
+import swaggerUi from "swagger-ui-express";
 
 const app = express();
 const port = config.server.port;
@@ -23,6 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "./public")));
 app.use(addLogger);
+app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
 //routes
 app.use("/api/products", productRouter);
