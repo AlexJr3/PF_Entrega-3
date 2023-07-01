@@ -1,0 +1,59 @@
+paths:
+  /api/products/:
+    get:
+      summary: Obtener productos\
+      tags:
+        - Products
+      response:
+        "200":
+          description: Productos obtenidos
+          content:
+            application/json:
+        "500":
+          description: Error servidor
+
+#------------- Componentes de productos -----------
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: objectId
+          description: Id generado por DB
+        title:
+          type: string
+          description: titulo de producto
+        description:
+          type: string
+          description: d. del producto
+        price:
+          type: number
+          description: precio del producto
+        thumbnails:
+          type: Array
+          description: imagenes de producto
+        code:
+          type: string
+          description: codigo unico del producto
+        stock:
+          type: number
+          description: stock del producto
+        status:
+          type: boolean
+          description: disponibilidad del producto
+        category:
+          type: string
+          description: Categoria del product
+
+      # --------  Ejemplo del schema -----------
+      example:
+        _id: objectId('asdin12dn12asmdasd')
+        title: "Monitor"
+        description: "Monitor Gamer 144hz 24 Pulgadas"
+        price: 3000
+        thumbnails: ["Imagen1", "imagen2", "imagen3"]
+        code: "123asdad"
+        stock: 30
+        status: true
+        category: "Tecnologia"

@@ -16,7 +16,7 @@ class ProductController {
     } catch (err) {
       req.logger.error({ err });
 
-      res.status(400).send({ status: "error", payload: err.message });
+      res.status(500).send({ status: "error", payload: err.message });
     }
   }
 
