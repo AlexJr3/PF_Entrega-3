@@ -25,7 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "./public")));
 app.use(addLogger);
-app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
+app.use("/apidocs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
 //routes
 app.use("/api/products", productRouter);

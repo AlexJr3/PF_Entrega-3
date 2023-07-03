@@ -4,13 +4,13 @@ paths:
       summary: Obtener productos\
       tags:
         - Products
-      response:
+      responses:
         "200":
           description: Productos obtenidos
           content:
             application/json:
               schema:
-                type: Array
+                type: array
                 items:
                   $ref: "#components/schemas/Product"
         "500":
@@ -29,13 +29,13 @@ paths:
           description: id del producto
           schema:
             $type: string
-      response:
+      responses:
         "200":
           description: Producto obtenido
           content:
             application/json:
               schema:
-                type: Array
+                type: array
                 items:
                   $ref: '#components/schemas/Product"'
         "500":
@@ -52,13 +52,13 @@ paths:
           description: id product
           schema:
             $type: string
-      response:
+      responses:
       "200":
         description: Producto actualizado
         content:
           application/json:
             schema:
-              type: Array
+              type: array
               items:
                 $ref: "#components/requestBodies/updateProduct"
       "500":
@@ -76,7 +76,7 @@ paths:
           description: id product
           schema:
             $type: string
-      response:
+      responses:
         "200":
           description: Producto eliminado
         "500":
@@ -100,7 +100,7 @@ components:
           type: number
           description: precio del producto
         thumbnails:
-          type: Array
+          type: array
           description: imagenes de producto
         code:
           type: string
@@ -142,7 +142,7 @@ components:
           type: number
           description: precio del producto
         thumbnails:
-          type: Array
+          type: array
           description: imagenes de producto
         stock:
           type: number
