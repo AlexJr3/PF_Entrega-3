@@ -9,9 +9,78 @@ paths:
           description: Productos obtenidos
           content:
             application/json:
+              schema:
+                type: Array
+                items:
+                  $ref: "#components/schemas/Product"
         "500":
           description: Error servidor
 
+  # GetID
+  /api/products/{pid}:
+    get:
+      summary: Obtener producto ById
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: id del producto
+          schema:
+            $type: string
+      response:
+        "200":
+          description: Producto obtenido
+          content:
+            application/json:
+              schema:
+                type: Array
+                items:
+                  $ref: '#components/schemas/Product"'
+        "500":
+          description: Error servidor
+    # Update product
+    put:
+      summary: Actualizar producto por Id
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: id product
+          schema:
+            $type: string
+      response:
+      "200":
+        description: Producto actualizado
+        content:
+          application/json:
+            schema:
+              type: Array
+              items:
+                $ref: "#components/requestBodies/updateProduct"
+      "500":
+        description: Server error
+
+    #Delete product
+    delete:
+      summary: Eliminar product
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: id product
+          schema:
+            $type: string
+      response:
+        "200":
+          description: Producto eliminado
+        "500":
+          description: Server error
 #------------- Componentes de productos -----------
 components:
   schemas:
@@ -57,3 +126,38 @@ components:
         stock: 30
         status: true
         category: "Tecnologia"
+
+  # -------- requestBodies -----------
+  requestBodies:
+    updateProduct:
+      type: object
+      properties:
+        title:
+          type: string
+          description: titulo de producto
+        description:
+          type: string
+          description: d. del producto
+        price:
+          type: number
+          description: precio del producto
+        thumbnails:
+          type: Array
+          description: imagenes de producto
+        stock:
+          type: number
+          description: stock del producto
+        status:
+          type: boolean
+          description: disponibilidad del producto
+        category:
+          type: string
+          description: Categoria del product
+      example:
+        title: "Producto Actualizado"
+        description: "Description Actualizada"
+        price: 1000 #Nuevo precio
+        thumbnails: ["Nueva imagen1", "nueva imagen2"] #Nuevas imagenes
+        stock: 300 #Nuevo stock
+        status: false #Nuevo status
+        category: "Almacen" #Nueva categoria
