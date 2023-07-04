@@ -1,0 +1,150 @@
+paths:
+  /api/carts/:
+    get:
+      summary: Obtener carritos
+      tags:
+        - Carts
+      responses:
+        "200":
+          description: Carritos obtenidos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/Cart"
+        "500":
+          description: Error servidor
+    #post
+    post:
+      summary: crear carrito
+      tags:
+        - Carts
+      responses:
+        "200":
+          description: carrito creado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                payload:
+                  $ref: "#components/schemas/Cart"
+  #getbyId
+  /api/carts/{cid}:
+    get:
+      summary: obtener carrito por Id
+      tags:
+        - Carts
+    parameters:
+      - name: cid
+        in: path
+        required: true
+        description: id del carrito
+        schema:
+          $type: string
+    responses:
+      "200":
+        description: Carrito obtenido
+        content:
+          application/json:
+            schema:
+              $ref: "#components/schemas/Cart"
+      "500":
+        description: Server internal error
+    #Eliminar carrito
+    delete:
+      summary: eliminar carrito
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: id del carrito
+          schema:
+            $type: string
+      responses:
+        "200":
+          description: Carrito eliminado
+        "500":
+          description: server error
+
+  #Agregar producto al carrito
+  /api/carts/{cid}/products/{pid}:
+    put:
+      summary: agregar producto al carrito
+      tags:
+        - Carts
+    parameters:
+      - name: cid
+        in: path
+        required: true
+        description: id del carrito
+        schema:
+          $type: string
+      - name: pid
+        in: path
+        required: true
+        description: id del producto
+        schema:
+          $type: string
+    responses:
+      "200":
+        description: Producto agregado correctamente
+      "500":
+        description: server internal error
+    #borrar producto del carrito
+    delete:
+      summary: Eliminar producto del carrito
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: id del carrito
+          schema:
+            $type: string
+        - name: pid
+          in: path
+          required: true
+          description: id del producto
+          schema:
+            $type: string
+      responses:
+        "200":
+          description: Producto borrado
+        "500":
+          description: Server error
+
+#Components
+components:
+  schemas:
+    Cart:
+      type: object
+      properties:
+        _id:
+          type: objectId
+          description: id del carrito
+        products:
+          type: array
+          product:
+            type: object
+            properties:
+              _id:
+                type: objectId
+                description: id del product
+              quantity:
+                type: number
+                description: cantidad de producto
+      #ejemplo
+      example:
+        _id: objectId('asljkdhasdkjwqd12231')
+        product:
+          [
+            { product: objectId('a123asd12dasd'), quantity: 100 },
+            { product: objectId('asd1adgfaxcc1g'), quantity: 50 },
+          ]

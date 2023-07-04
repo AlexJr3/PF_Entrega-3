@@ -15,7 +15,28 @@ paths:
                   $ref: "#components/schemas/Product"
         "500":
           description: Error servidor
-
+    post:
+      summary: Crear producto
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+        application/json:
+          schema:
+            $ref: "#components/requestBodies/updateProduct"
+      responses:
+        "200":
+          description: Producto creado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    payload:
+                      $ref: "#components/schemas/Products"
   # GetID
   /api/products/{pid}:
     get:
